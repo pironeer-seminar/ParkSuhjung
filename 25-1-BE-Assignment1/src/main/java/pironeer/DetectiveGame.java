@@ -156,7 +156,7 @@ public class DetectiveGame {
         System.out.println("잘못된 입력입니다! 시간이 얼마 남지 않았습니다, 다시 시도해주세요!");
         System.out.println("범인은 아직도 우리 곁에 있어요. 서둘러 진실을 밝혀내야 합니다!");
         System.out.println(detectiveName + ": 좋아, 이번엔 잘 선택해보자.");
-
+        //9번
         investigate();
     }
 
