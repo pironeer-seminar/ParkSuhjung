@@ -129,6 +129,29 @@ public class DetectiveGame {
         String choiceName = reader.nextLine().trim();
 
         // 8. 사용자가 입력한 이름을 가진 용의자 조사
+        Optional<Character> selectedCharacter = characters.stream()
+                .filter(item -> item.getName().equals(choiceName))
+                .findFirst()
+                .ifPresentOrElse(
+                        item-> {
+                            System.out.println(item.getName + "의 인상착의를 봅니다.");
+                            System.out.println("- 머리: " + item.getHair());
+                            System.out.println("- 옷: " + item.getClothes());
+                            System.out.println("- 신발: " + item.getShoes());
+                            String choice = promptChoice("\n계속 조사하시겠습니까? (네/아니오): ").trim();
+                            if (choice.equals("네")) {
+                                investigate();
+                            } else {
+                                accuse();
+                            }
+                        },
+                        () -> {
+                            System.out.println("\n이름을 다시 입력해주세요.");
+                            investigate();
+                        }
+                )
+
+                // 8 완료
 
         System.out.println("잘못된 입력입니다! 시간이 얼마 남지 않았습니다, 다시 시도해주세요!");
         System.out.println("범인은 아직도 우리 곁에 있어요. 서둘러 진실을 밝혀내야 합니다!");
