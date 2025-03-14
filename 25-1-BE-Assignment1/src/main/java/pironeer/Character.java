@@ -23,10 +23,19 @@ public class Character {
         return shoes;
     }
 
+    public String getAppearance(Appearance type) {
+        return switch (type) {
+            case HAIR -> hair;
+            case CLOTHES -> clothes;
+            case SHOES -> shoes;
+        };
+    }
+
     public Character(String name, String hair, String clothes, String shoes) {
         this.name = name;
         this.hair = hair;
         this.clothes = clothes;
         this.shoes = shoes;
     }
+
 }

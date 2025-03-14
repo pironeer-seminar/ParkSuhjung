@@ -132,6 +132,7 @@ public class DetectiveGame {
         Optional<Character> selectedCharacter = characters.stream()
                 .filter(item -> item.getName().equals(choiceName))
                 .findFirst();
+
         selectedCharacter.ifPresentOrElse(
                 item-> {
                             System.out.println(item.getName()+ "의 인상착의를 봅니다.");
