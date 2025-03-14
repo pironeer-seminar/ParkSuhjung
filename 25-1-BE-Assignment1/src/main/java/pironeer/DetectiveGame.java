@@ -33,6 +33,14 @@ public class DetectiveGame {
         lives = 2;
     }
 
+    private String getMurdererAppearance(Appearance type) {
+        return switch (type) {
+            case HAIR -> murderer.getHair();
+            case CLOTHES -> murderer.getClothes();
+            case SHOES -> murderer.getShoes();
+        };
+    }
+
     public void showIntro() {
         System.out.println("탐정 게임에 오신 것을 환영합니다.");
         timer.sleep(1000);
@@ -45,27 +53,13 @@ public class DetectiveGame {
         // 4,5 완료
         murderer = characters.get(random.nextInt(characters.size()));
 
-        List<String> dyingMessageType = List.of(
-                "hair",
-                "clothes",
-                "shoes"
-        );
+
 
         // 6. 랜덤하게 속성 값을 선택하고 다잉메시지 출력
-        String selectedType = dyingMessageType.get(random.nextInt(dyingMessageType.size()));
-        switch (selectedType) {
-            case "hair":
-                dyingMessage = "머리스타일은 " + murderer.getHair() + " 윽..☠️";
-                break;
-            case "clothes":
-                dyingMessage = "옷은 " + murderer.getClothes() + " 윽..☠️";
-                break;
-            case "shoes":
-                dyingMessage = "신발은 " + murderer.getShoes() + " 윽..☠️";
-                break;
-            default:
-                dyingMessage = "ValueError";
-        }
+
+        Appearance selectedType = Appearance.getRandomAppearance();
+        dyingMessage = selectedType.getDescription() + "은 " + getMurdererAppearance(selectedType) + " 윽..☠️";
+
 
         //6번 완료
         System.out.println("########################################");

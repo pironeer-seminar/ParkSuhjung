@@ -14,4 +14,9 @@ public enum Appearance {
     public String getDescription() {
         return description;
     }
+
+    public static Appearance getRandomAppearance() {
+        Appearance[] values = Appearance.values();
+        return values[new java.util.Random().nextInt(values.length)];
+    }
 }
