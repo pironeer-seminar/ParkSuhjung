@@ -52,7 +52,7 @@ public class DetectiveGame {
         );
 
         // 6. 랜덤하게 속성 값을 선택하고 다잉메시지 출력
-        Optional selectedType = dyingMessageType.get(random.nextInt(dyingMessageType.size()));
+        String selectedType = dyingMessageType.get(random.nextInt(dyingMessageType.size()));
         switch (selectedType) {
             case "hair":
                 dyingMessage = "머리스타일은 " + murderer.getHair() + " 윽..☠️";
@@ -131,10 +131,10 @@ public class DetectiveGame {
         // 8. 사용자가 입력한 이름을 가진 용의자 조사
         Optional<Character> selectedCharacter = characters.stream()
                 .filter(item -> item.getName().equals(choiceName))
-                .findFirst()
-                .ifPresentOrElse(
-                        item-> {
-                            System.out.println(item.getName + "의 인상착의를 봅니다.");
+                .findFirst();
+        selectedCharacter.ifPresentOrElse(
+                item-> {
+                            System.out.println(item.getName()+ "의 인상착의를 봅니다.");
                             System.out.println("- 머리: " + item.getHair());
                             System.out.println("- 옷: " + item.getClothes());
                             System.out.println("- 신발: " + item.getShoes());
@@ -149,7 +149,7 @@ public class DetectiveGame {
                             System.out.println("\n이름을 다시 입력해주세요.");
                             investigate();
                         }
-                )
+                );
 
                 // 8 완료
 
@@ -161,9 +161,9 @@ public class DetectiveGame {
     }
 
     public boolean matchDyingMessage(Character character) {
-        if (dyingMessage.equals("머리스타일은 " + murderer.getHair() + "윽..☠") ||
-                dyingMessage.equals("옷은 " + murderer.getClothes() + "윽..☠") ||
-                dyingMessage.equals("신발은 " + murderer.getShoes() + "윽..☠")) {
+        if (dyingMessage.equals("머리스타일은 " + murderer.getHair() + " 윽..☠️") ||
+                dyingMessage.equals("옷은 " + murderer.getClothes() + " 윽..☠️") ||
+                dyingMessage.equals( "신발은 " + murderer.getShoes() + " 윽..☠️")) {
             return true;
         }
         return false;
