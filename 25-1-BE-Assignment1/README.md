@@ -32,7 +32,7 @@
 - `investigate()`에서 `Optional.ifPresentOrElse()` 사용하여 **중복 로직 제거**
 ---
 
-###  **5. Stream API 사용**
+###  **4. Stream API 사용**
 
 ### - **반복문 단순화 (`printCharacterAppearance()`)**
 
