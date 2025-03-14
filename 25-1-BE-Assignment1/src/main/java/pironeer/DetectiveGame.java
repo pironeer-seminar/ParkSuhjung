@@ -6,6 +6,8 @@ import java.util.Random;
 import pironeer.util.Reader;
 import pironeer.util.Timer;
 import java.util.Optional;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class DetectiveGame {
 
@@ -112,33 +114,45 @@ public class DetectiveGame {
         System.out.println("########################################");
         timer.sleep(1000);
     }
-
-    public void investigate() {
+    //investigate 함수 리팩토링 시작
+    private void startSuspect() {
         System.out.println("용의자와 대화를 나누고 인상착의를 수집하세요...");
         for (int i = 1; i <= characters.size(); i++) {
             System.out.println(i + ". " + characters.get(i - 1).getName());
         }
-
         System.out.println("\n누구를 조사하시겠습니까? 이름을 입력하세요: ");
+
+    }
+
+    private void printCharacterAppearance(Character character) {
+        System.out.println(character.getName() + "의 인상착의를 봅니다.");
+        //stream api 사용
+        Stream <Appearance> appearanceStream = Arrays.stream(Appearance.values());
+
+        appearanceStream.forEach(type ->
+                System.out.println("- " + type.getAppearanceType() + ": " + character.getAppearance(type))
+        );
+
+        if (promptChoice("\n계속 조사하시겠습니까? (네/아니오): ").equals("네")) {
+            investigate();
+        } else {
+            accuse();
+        }
+    }
+
+    public void investigate() {
+        startSuspect();
         String choiceName = reader.nextLine().trim();
 
         // 8. 사용자가 입력한 이름을 가진 용의자 조사
+        //optional 사용& stream api 사용
         Optional<Character> selectedCharacter = characters.stream()
                 .filter(item -> item.getName().equals(choiceName))
                 .findFirst();
 
         selectedCharacter.ifPresentOrElse(
                 item-> {
-                            System.out.println(item.getName()+ "의 인상착의를 봅니다.");
-                            System.out.println("- 머리: " + item.getHair());
-                            System.out.println("- 옷: " + item.getClothes());
-                            System.out.println("- 신발: " + item.getShoes());
-                            String choice = promptChoice("\n계속 조사하시겠습니까? (네/아니오): ").trim();
-                            if (choice.equals("네")) {
-                                investigate();
-                            } else {
-                                accuse();
-                            }
+                            printCharacterAppearance(item);
                         },
                         () -> {
                             System.out.println("\n이름을 다시 입력해주세요.");

@@ -12,8 +12,15 @@ public enum Appearance {
     }
 
     public String getDescription() {
+        if (this == HAIR) {
+            return "머리스타일";
+        }
         return description;
     }
+    public String getAppearanceType() {
+        return description;
+    }
+
 
     public static Appearance getRandomAppearance() {
         Appearance[] values = Appearance.values();
