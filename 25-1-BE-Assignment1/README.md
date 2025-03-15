@@ -14,7 +14,7 @@
 ## 🛠 과제 수행 결과
 ###  **1. 함수 역할 분리**
 
-- 함수별 역할을 명확히 분리하여 20줄 이하 유지
+- 함수별 역할을 명확히 분리하여 **20줄 이하 유지**
 - 주요 함수:
     - `startSuspect()`
     - `printCharacterAppearance()`
@@ -42,7 +42,7 @@
 
 Stream<Appearance> appearanceStream = Arrays.stream(Appearance.values());
 appearanceStream.forEach(type ->
-    System.out.println("- " + type.getDescription() + ": " + character.getAppearance(type))
+    System.out.println("- " + type.getAppearanceType() + ": " + character.getAppearance(type))
 );
 
 ```
