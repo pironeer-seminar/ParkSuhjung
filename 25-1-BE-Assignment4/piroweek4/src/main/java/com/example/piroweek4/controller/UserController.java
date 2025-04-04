@@ -1,8 +1,7 @@
 package com.example.piroweek4.controller;
 
 
-import com.example.piroweek4.dto.Requset.UserCreateReq;
-import com.example.piroweek4.dto.Response.UserCreateRes;
+import com.example.piroweek4.dto.request.UserCreateReq;
 import com.example.piroweek4.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("")
-    public UserCreateRes create(@RequestBody UserCreateReq req) {
+    public Long create(@RequestBody UserCreateReq req) {
         return userService.create(req);
     }
 
